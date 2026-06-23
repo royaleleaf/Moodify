@@ -1,0 +1,323 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body {
+    font-family:'Times New Roman', Times, serif;
+    line-height: 1.5;
+	min-height: 100vh;
+	background: #f5f7fb;
+	color: #1f2937;
+}
+
+
+.main {
+	min-height: 100vh;
+	display: flex; /* row */
+	flex-direction: column;
+	align-items: center; /* column */
+	justify-content: center; /* row */
+	gap: 1.25rem;
+	padding: 1.25rem;
+	background: radial-gradient(circle at center, #d53542, #8B1E2D, #3A0F12);
+}
+
+
+.song-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.1rem;
+	width: min(88vw, 360px);
+	aspect-ratio: 14 / 15;
+	padding: 2rem;
+	border-radius: 20px;
+	background: rgba(130, 130, 130, 0.533);
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(3, 17, 110, 0.263);
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+	transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+	cursor: pointer;
+}
+
+.song-card:hover {
+	transform: translateY(-6px);
+	background: rgba(145, 145, 145, 0.62);
+	border-color: rgba(255, 255, 255, 0.38);
+	box-shadow: 0 0 18px rgba(255, 255, 255, 0.2), 0 0 36px rgba(255, 238, 238, 0.16), 0 18px 34px rgba(0, 0, 0, 0.35);
+}
+
+.add-circle {
+	width: clamp(150px, 15vw, 300px);
+	aspect-ratio: 1;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff7f7;
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+.add-circle:hover {
+	transform: scale(1.04);
+	background: rgba(255, 255, 255, 0.14);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.18), 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+.add-circle:hover .plus {
+	text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+.add-circle:active {
+	transform: scale(1.01);
+	box-shadow: 0 0 8px rgba(255, 255, 255, 0.16), 0 6px 14px rgba(0, 0, 0, 0.14);
+}
+
+.plus {
+	font-size: 2rem;
+	line-height: 1;
+	font-weight: 400;
+	user-select: none;
+}
+
+.add-label {
+	font-size: 1.1rem;
+	color: #fff2f2;
+	letter-spacing: 0.3px;
+	font-weight: 600;
+}
+
+/*wsp*/
+
+.playlist-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	display: grid;
+	place-items: center;
+	padding: 1rem;
+}
+
+[hidden] {
+	display: none;
+}
+
+.playlist-modal__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(10, 10, 15, 0.58);
+	backdrop-filter: blur(8px);
+}
+
+.playlist-modal__panel {
+	position: relative;
+	z-index: 1;
+	width: min(92vw, 560px);
+	max-height: min(88vh, 760px);
+	overflow: auto;
+	padding: 1.5rem;
+	border-radius: 24px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 28px rgba(255, 255, 255, 0.08);
+	color: #fff8f8;
+}
+
+.playlist-modal__panel h2 {
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	margin-bottom: 1rem;
+}
+
+.playlist-modal__close {
+	position: absolute;
+	top: 0.8rem;
+	right: 0.8rem;
+	width: 2.25rem;
+	height: 2.25rem;
+	border: 0;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.16);
+	color: #fff;
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.playlist-form {
+	display: grid;
+	gap: 1rem;
+}
+
+.playlist-form__group {
+	display: grid;
+	gap: 0.45rem;
+}
+
+.playlist-form__group label {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.playlist-form__hint {
+	font-size: 0.92rem;
+	color: rgba(255, 244, 244, 0.84);
+}
+
+.playlist-form input,
+.playlist-form textarea {
+	width: 100%;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 14px;
+	padding: 0.9rem 1rem;
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff;
+	font: inherit;
+	outline: none;
+}
+
+.playlist-form input::placeholder,
+.playlist-form textarea::placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.playlist-form input:focus,
+.playlist-form textarea:focus {
+	border-color: rgba(255, 255, 255, 0.55);
+	box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
+}
+
+.spotify-link {
+	width: fit-content;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 700;
+	padding-bottom: 0.1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.playlist-form__submit {
+	margin-top: 0.4rem;
+	border: 0;
+	border-radius: 14px;
+	padding: 0.95rem 1.1rem;
+	background: linear-gradient(135deg, #ffffff, #ffe5e5);
+	color: #6d1a23;
+	font: inherit;
+	font-weight: 800;
+	cursor: pointer;
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.playlist-form__submit:hover {
+	box-shadow: 0 0 16px rgba(255, 255, 255, 0.28), 0 14px 28px rgba(0, 0, 0, 0.24);
+}
+
+.result-panel {
+	width: min(92vw, 760px);
+	padding: 1.25rem;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	backdrop-filter: blur(10px);
+	color: #fff;
+	box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.result-panel h2 {
+	font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+	margin-bottom: 0.2rem;
+}
+
+.result-panel__engine {
+	font-size: 0.88rem;
+	color: rgba(255, 255, 255, 0.8);
+	margin-bottom: 0.5rem;
+}
+
+.result-panel__error {
+	font-size: 0.88rem;
+	margin-bottom: 0.5rem;
+	padding: 0.55rem 0.7rem;
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.12);
+	color: #ffe2e2;
+	word-break: break-word;
+}
+
+.result-panel__summary {
+	font-size: 1rem;
+	margin-bottom: 0.8rem;
+	color: #fff3f3;
+}
+
+.result-list {
+	display: grid;
+	gap: 0.6rem;
+	padding-left: 1.3rem;
+}
+
+.result-list__item {
+	padding: 0.55rem 0.7rem;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.result-list__item h3 {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.result-list__item h3 span {
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.result-list__item p {
+	font-size: 0.94rem;
+	color: #fff0f0;
+}
+
+.mood-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+/* hide radio buttons */
+.mood-options input[type="radio"] {
+    display: none;
+}
+
+/* base button style */
+.mood-options label {
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+/* hover effect */
+.mood-options label:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* selected state */
+.mood-options input[type="radio"]:checked + label {
+    background: linear-gradient(135deg, #ffffff, #ffe5e5);
+    color: #6d1a23;
+    border-color: transparent;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+}
